@@ -1,0 +1,134 @@
+<!--This is single house view.-->
+
+<section class="container" style="margin: 5%" *ngIf="singleHouse">
+
+  <div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;color:black">
+      <fa class="card-img-top" name="university" size="2x"></fa>
+      <h2>{{singleHouse.name || defaultValue}}</h2>
+    </div>
+
+    <div class="card col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <div class="card-body">
+        <h3 class="card-title">Region:</h3>
+        <p class="text-color">{{singleHouse.region || defaultValue}}</p>
+        <h3 class="card-subtitle mb-2">Coat Of Arms:</h3>
+        <p class="text-color">{{singleHouse.coatOfArms || defaultValue}}</p>
+        <h3>Words:</h3>
+        <p class="text-color">{{singleHouse.words || defaultValue}}</p>
+        <h3 *ngIf="singleHouse.titles">Titles:</h3>
+        <p class="text-color">
+          <span class="card-text" *ngFor="let title of singleHouse.titles"> {{title || defaultValue}}</span>
+        </p>
+        <h3>Seats:</h3>
+        <p class="text-color">
+          <span class="card-text" *ngFor="let seat of singleHouse.seats"> {{seat || defaultValue}}</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="card col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <div class="card-body">
+        <h3 class="card-title" *ngIf="singleHouse.currentLord !== ''">Current Lord:</h3>
+        <p *ngIf="singleHouse.currentLord !== ''">
+          <a class="btn btn-primary" routerLink="/character/{{singleHouse.currentLord.split('/').pop()}}">
+            Character {{singleHouse.currentLord.split('/').pop()}}
+          </a>
+        </p>
+        <h3 class="card-subtitle">Over Lord:</h3>
+        <p>
+          <a class="btn btn-success" routerLink="/house/{{singleHouse.overlord.split('/').pop()}}">
+            House {{singleHouse.overlord.split('/').pop()}}
+          </a>
+        </p>
+        <h3>Heir:</h3>
+        <p>
+          <a class="btn btn-primary" routerLink="/character/{{singleHouse.heir.split('/').pop()}}">Character {{ singleHouse.heir.split('/').pop() || defaultValue}}</a>
+        </p>
+        <h3>Founded:</h3>
+        <p class="text-color">{{singleHouse.founded || defaultValue}}</p>
+        <h3>Founder:</h3>
+        <p>
+          <a class="btn btn-primary" routerLink="/character/{{singleHouse.founder.split('/').pop()}}">Character {{singleHouse.founder.split('/').pop() || defaultValue}}</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <h3 *ngIf="singleHouse.swornMembers.length || singleHouse.cadetBranches.length">Sworn Members & Cadet Branches</h3>
+      
+      <!-- use of accordion for best effect-->
+      <div class="card-body" id="accordion" *ngIf="singleHouse.swornMembers.length || singleHouse.cadetBranches.length">
+        <div class="card">
+          <div class="card-header bg-success" id="headingOne" *ngIf="singleHouse.swornMembers.length" >
+            <h5 class="mb-0">
+              <button class="btn btn-success btn-block" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Sworn Members
+              </button>
+            </h5>
+          </div>
+
+          <!-- Division displaying Sworn Members -->
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body" *ngIf="singleHouse.swornMembers.length">
+              <div *ngFor="let swornMember of singleHouse.swornMembers">
+                <div class="card">
+                  <div class="row">
+                    <div class="card-header col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <a routerLink="/character/{{swornMember.split('/').pop()}}">
+                        <p style="text-align: center; color: black">Character {{swornMember.split('/').pop() || defaultValue }}</p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Second item in Accordion -->
+        <div class="card">
+          <div class="card-header bg-warning" id="headingTwo" *ngIf="singleHouse.cadetBranches.length">
+            <h5 class="mb-0">
+              <button class="btn btn-warning btn-block collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                aria-controls="collapseOne">
+                Cadet Branches
+              </button>
+            </h5>
+          </div>
+
+          <!-- Division displaying Cadet Branches -->
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body" *ngIf="singleHouse.cadetBranches.length">
+              <div *ngFor="let cadetBranch of singleHouse.cadetBranches">
+                <div class="card">
+                  <div class="row">
+                    <div class="card-header col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <a routerLink="/character/{{cadetBranch.split('/').pop()}}">
+                        <p style="text-align: center; color: black">POV Character {{cadetBranch.split('/').pop() || defaultValue}}</p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <h3>Ancestral Weapons:</h3>
+      <p class="text-color">
+        <span *ngFor="let weapon of singleHouse.ancestralWeapons">
+          {{weapon || defaultValue}}
+        </span>
+      </p>
+      <h3>Died Out:</h3>
+      <p class="text-color">{{singleHouse.diedOut || defaultValue}}</p>
+    </div>
+
+    <button class="btn btn-block btn-outline-success offset-4 col-4" (click)="goBack()">Go Back</button>
+
+  </div>
+
+</section>

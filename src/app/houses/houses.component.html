@@ -1,0 +1,46 @@
+<!-- This is Houses Component view-->
+
+<section class="container-fluid">
+
+
+
+  <form class="form-inline" #myForm="ngForm" class="row">
+    <div class="form-group  col-md-6">
+      <input type="text" class="form-control btn-outline-success" name="filterName" [(ngModel)]="filterName.name" placeholder="Search by Name" />
+    </div>
+    <div class="form-group col-md-6">
+      <button class="btn btn-block btn-outline-success" (click)="changeOrder()"  name="button">
+        Change Sort Order
+      </button>
+    </div>
+  </form>
+
+  <!--    <button class="col-sm-4 btn btn-primary" (click)="changeOrder()">Change Order</button>-->
+
+  <div class="row" *ngIf="allHouses.length > 0">
+    <div class="col-md-4" *ngFor="let singleHouse of allHouses | orderBy:sortOrder | filterBy: filterName">
+      <div class="card">
+        <fa class="card-img-top" name="university" size="5x"></fa>
+        <div class="card-body">
+          <h5 class="card-title">{{singleHouse.name || defaultValue}}</h5>
+          <a routerLink="/house/{{singleHouse.url.split('/').pop()}}" class="btn btn-success">See Details</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- This is for Go to Top Button-->
+    <go-top-button [animate]="true"
+    [speed]="50"
+    [acceleration]="50"
+    [scrollDistance]="300"
+    [styles]="{
+       'border-radius': '25%',
+       'color': 'grey',
+       'background-color': 'black',
+       'border': '5px solid',
+       'line-height': '20px'
+    }">
+    <fa name="arrow-up"></fa>
+  </go-top-button>
+  </div>
+</section>>

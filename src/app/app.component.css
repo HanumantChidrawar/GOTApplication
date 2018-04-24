@@ -1,0 +1,14 @@
+nav{
+    background-color:black;
+}
+ul li a{
+    color: white;
+}
+ul li a:hover{
+    color: white;
+    opacity: 0.5;
+}
+ul li a:focus{
+    color: white;
+    opacity: 0.5;
+}

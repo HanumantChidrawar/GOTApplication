@@ -1,0 +1,26 @@
+.card{
+    margin-bottom: 2%;
+    border: solid;
+}
+.card{
+    text-align: center;
+}
+.charactersElement{
+    border-color: blue;
+}
+.housesElement{
+    border-color: green;
+}
+.booksElement{
+    border-color: red;
+}
+.charactersElement fa{
+    color: blue;
+}
+.housesElement fa{
+    color: green;
+}
+.booksElement fa{
+    color: red;
+}
+.card:hover { box-shadow: 4px 4px rgba(0, 0, 0, .5); }

@@ -1,0 +1,11 @@
+.card{
+    margin-bottom: 2%;
+    border: solid;
+    border-color: blue;
+    text-align: center;
+}
+fa{
+    color: blue;
+}
+.card:hover { box-shadow: 4px 4px rgba(0, 0, 0, .5); }
+

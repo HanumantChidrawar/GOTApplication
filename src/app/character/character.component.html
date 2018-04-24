@@ -1,0 +1,97 @@
+<!--This single character view -->
+
+<section class="container" style="margin: 5%">
+
+  <div class="row">
+
+    <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+      <div style="text-align: center">
+        <fa class="card-img-top" name="user" size="2x"></fa>
+        <h2>{{singleCharacter.name || defaultValue}}</h2>
+      </div>
+    </div>
+
+    <!-- <div class="row" >-->
+
+    <div class="card col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <div class="card-body">
+        <h3 class="card-title" *ngIf="singleCharacter.playedBy">Played by:</h3>
+        <p class="text-color" *ngIf="singleCharacter.playedBy">{{singleCharacter.playedBy[0] || defaultValue}}<br></p>
+        <h3 class="card-subtitle mb-2"> Aliases:</h3>
+        <span *ngFor="let alias of singleCharacter.aliases" class="text-color">
+          {{alias || defaultValue}}
+        </span><br><br>
+        <h3 class="card-subtitle mb-2"> Title:</h3>
+        <span *ngFor="let title of singleCharacter.titles" class="text-color">
+          {{title || defaultValue}}
+        </span><br><br>
+        <h3>Culture: </h3>
+        <p class="text-color">{{singleCharacter.culture || defaultValue}}</p>
+        <h3>Gender: </h3>
+        <p class="text-color">{{singleCharacter.gender || defaultValue}}</p>
+        <h3>Born: </h3>
+        <p class="text-color">{{singleCharacter.born || defaultValue}}</p>
+        <h3>Died: </h3>
+        <p class="text-color">{{singleCharacter.died || defaultValue}}</p>
+      </div>
+    </div>
+
+
+    <div class="card col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <div class="card-body">
+        <h3 class="card-subtitle mb-2 " *ngIf="singleCharacter.allegiances">Allegiances:</h3>
+        <span *ngFor="let allegiance of singleCharacter.allegiances">
+          <a class="btn btn-success" routerLink="/house/{{allegiance.split('/').pop()}}">
+            House {{allegiance.split('/').pop() || defaultValue}}
+          </a>
+        </span><br><br>
+        <h3 class="card-subtitle mb-2">Books:</h3>
+        <span *ngFor="let book of singleCharacter.books">
+          <a class="btn btn-danger" routerLink="/book/{{book.split('/').pop()}}" style="margin: 1%">
+            Book {{book.split('/').pop() || defaultValue}}
+          </a>
+        </span><br><br>
+        <div>
+          <h3>Father: </h3>
+          <p *ngIf="singleCharacter.father">
+            <a class="btn btn-primary" routerLink="/character/{{singleCharacter.father.split('/').pop()}}">Character {{singleCharacter.father.split('/').pop()}}</a>
+          </p>
+          <p class="text-color" *ngIf="!singleCharacter.father">{{defaultValue}}</p>
+          <h3>Mother: </h3>
+          <p *ngIf="singleCharacter.mother">
+            <a class="btn btn-primary" routerLink="/character/{{singleCharacter.mother.split('/').pop()}}">Character {{singleCharacter.mother.split('/').pop() }}</a>
+          </p>
+          <p class="text-color" *ngIf="!singleCharacter.mother">{{defaultValue}}</p>
+          <h3>Spouse: </h3>
+          <p *ngIf="singleCharacter.spouse">
+            <a class="btn btn-primary" routerLink="/character/{{singleCharacter.spouse.split('/').pop()}}">Character {{singleCharacter.spouse.split('/').pop()}}</a>
+          </p>
+          <p class="text-color" *ngIf="!singleCharacter.spouse">{{defaultValue}}</p>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="singleCharacter.tvSeries || singleCharacter.povBooks">
+      <div class="card-body">
+        <h2 class="card-title">Seasons and POV Books</h2>
+        <h3 *ngIf="singleCharacter.tvSeries">Season: </h3>
+        <span class="text-color" *ngFor="let season of singleCharacter.tvSeries">
+          Season {{season || defaultValue}}
+        </span><br><br>
+        <h3 class="card-subtitle mb-2" *ngIf="singleCharacter.povBooks"> POV Book: </h3>
+        <span *ngFor="let povBook of singleCharacter.povBooks">
+          <a class="btn btn-danger" routerLink="/book/{{povBook.split(' / ').pop()}}">
+            POV Book {{povBook.split('/').pop() || defaultValue}}
+          </a>
+        </span>
+      </div>
+
+    </div>
+    <button class="btn btn-block btn-outline-primary offset-4 col-4" (click)="goBack()">Go Back</button>
+
+  </div>
+
+</section>

@@ -1,0 +1,17 @@
+.types{
+    text-align: center;
+  }
+
+  .types a{
+      text-decoration: none;
+      color: black;
+  }
+
+  .grow:hover { transform: scale(1.25);}
+
+  .img-size{
+
+    height: 150px;
+    width: 150px;
+  }
+  

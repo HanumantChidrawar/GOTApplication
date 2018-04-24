@@ -1,0 +1,64 @@
+<!-- This is all Component view-->
+
+<section class="container-fluid">
+
+    <div class="row">
+        <div class="alert alert-warning clo-12" role="alert">
+            Here the Characters who don't have any name are displayed with "NONE" as name and they come first in alphabetical order.
+          </div>
+    </div>
+
+    <form class="form-inline" #myForm="ngForm" class="row">
+        <div class="form-group  col-md-6">
+          <input type="text" class="form-control btn-outline-info" name="filterName" [(ngModel)]="filterName.name" placeholder="Search by Name" />
+        </div>
+        <div class="form-group col-md-6">
+          <button type="button" class="btn btn-block btn-outline-info" (click)="changeOrder()" name="button">
+            Change Sort Order
+          </button>
+        </div>
+      </form>
+
+  <div class="row" *ngIf="allData.length > 0">
+    <div class="col-md-4" *ngFor="let singleElement of allData | orderBy: sortOrder | filterBy: filterName">
+      <div class="card booksElement" *ngIf="singleElement.isbn">
+        <fa class="card-img-top" name="book" size="5x"></fa>
+        <div class="card-body">
+          <h5 class="card-title">{{singleElement.name || defaultValue}}</h5>
+          <a routerLink="/book/{{singleElement.url.split('/').pop()}}" class="btn btn-danger">See Details</a>
+        </div>
+      </div>
+
+      <div class="card housesElement" *ngIf="singleElement.region">
+        <fa class="card-img-top" name="university" size="5x"></fa>
+        <div class="card-body">
+          <h5 class="card-title">{{singleElement.name || defaultValue}}</h5>
+          <a routerLink="/house/{{singleElement.url.split('/').pop()}}" class="btn btn-success">See Details</a>
+        </div>
+      </div>
+
+      <div class="card charactersElement" *ngIf="singleElement.gender">
+        <fa class="card-img-top" name="user" size="5x"></fa>
+        <div class="card-body">
+          <h5 class="card-title">{{singleElement.name || defaultValue}}</h5>
+          <a routerLink="/character/{{singleElement.url.split('/').pop()}}" class="btn btn-primary">See Details</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- This is for Go to Top Button-->
+    <go-top-button [animate]="true"
+    [speed]="50"
+    [acceleration]="50"
+    [scrollDistance]="300"
+    [styles]="{
+       'border-radius': '25%',
+       'color': 'grey',
+       'background-color': 'black',
+       'border': '5px solid',
+       'line-height': '20px'
+    }">
+    <fa name="arrow-up"></fa>
+  </go-top-button>
+  </div>
+</section>>

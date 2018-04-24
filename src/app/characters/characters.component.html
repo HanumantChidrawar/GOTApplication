@@ -1,0 +1,49 @@
+<!-- This is Houses Component view-->
+
+<section class="container-fluid">
+
+  <div class="row">
+      <div class="alert alert-warning clo-12" role="alert">
+          Here the Characters who don't have any name are displayed with "NONE" as name and they come first in alphabetical order.
+        </div>
+  </div>
+
+  <form class="form-inline" #myForm="ngForm" class="row">
+    <div class="form-group  col-md-6">
+      <input type="text" class="form-control btn-outline-primary" name="filterName" [(ngModel)]="filterName.name" placeholder="Search by Name" />
+    </div>
+    <div class="form-group col-md-6">
+      <button class="btn btn-block btn-outline-primary" (click)="changeOrder()"  name="button">
+        Change Sort Order
+      </button>
+    </div>
+  </form>
+
+  <div class="row" *ngIf="allCharacters.length > 0">
+    <div class="col-md-4" *ngFor="let singleCharacter of allCharacters | orderBy: sortOrder |filterBy: filterName">
+      <div class="card">
+        <fa class="card-img-top" name="user" size="5x"></fa>
+        <div class="card-body">
+          <h5 class="card-title">{{singleCharacter.name || defaultValue}}</h5>
+          <a routerLink="/character/{{singleCharacter.url.split('/').pop()}}" class="btn btn-primary">See Details</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- This is for Go to Top Button-->
+    <go-top-button [animate]="true"
+    [speed]="50"
+    [acceleration]="50"
+    [scrollDistance]="300"
+    [styles]="{
+       'border-radius': '25%',
+       'color': 'grey',
+       'background-color': 'black',
+       'border': '5px solid',
+       'line-height': '20px'
+    }">
+    <fa name="arrow-up"></fa>
+  </go-top-button>
+  
+  </div>
+</section>

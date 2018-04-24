@@ -1,0 +1,104 @@
+<section class="container" style="margin: 5%">
+
+  <div class="row">
+
+    <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+      <div style="text-align: center">
+        <fa class="card-img-top" name="book" size="2x"></fa>
+        <h2>{{singleBook.name || defaultValue}}</h2>
+      </div>
+    </div>
+
+    <!-- <div class="row" >-->
+
+    <div class="card col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <div class="card-body">
+        <h3 style="color: Black">Publisher:</h3>
+        <p class="text-color">{{singleBook.publisher || defaultValue}}</p>
+        <div *ngFor="let author of singleBook.authors">
+          <h3 class="card-subtitle mb-2 "> Author:</h3>
+          <p class="text-color">{{author || defaultValue}}</p>
+        </div>
+        <h3>Country:</h3>
+        <p class="text-color">{{singleBook.country || defaultValue}}</p>
+        <h3>Pages:</h3>
+        <p class="text-color">{{singleBook.numberOfPages || defaultValue}}</p>
+        <h3>ISBN:</h3>
+        <p class="text-color">{{singleBook.isbn || defaultValue}}</p>
+        <h3>Media Type:</h3>
+        <p class="text-color">{{singleBook.mediaType || defaultValue}}</p>
+        <h3>Released:</h3>
+        <p class="text-color">{{((singleBook.released) | date: 'medium' )|| defaultValue}}</p>
+      </div>
+    </div>
+
+
+    <div class="card col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <h3>Characters & POV's</h3>
+      <!-- use of accordion for best effect-->
+      <div class="card-body" id="accordion">
+        <div class="card">
+          <div class="card-header bg-success" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-success btn-block" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Characters
+              </button>
+            </h5>
+          </div>
+
+          <!-- Division displaying Characters in book -->
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              <div *ngFor="let singleCharacter of singleBook.characters">
+                <div class="card">
+                  <div class="row">
+                    <div class="card-header col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <a routerLink="/character/{{singleCharacter.split('/').pop()}}">
+                        <p style="text-align: center; color: black">Character {{singleCharacter.split('/').pop()}}</p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Second item in Accordion -->
+        <div class="card">
+          <div class="card-header bg-danger" id="headingTwo">
+            <h5 class="mb-0">
+              <button class="btn btn-danger btn-block collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                aria-controls="collapseOne">
+                POV Characters
+              </button>
+            </h5>
+          </div>
+
+          <!-- Division displaying POV Characters of book -->
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+              <div *ngFor="let singleCharacter of singleBook.povCharacters">
+                <div class="card">
+                  <div class="row">
+                    <div class="card-header col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <a routerLink="/character/{{singleCharacter.split('/').pop()}}">
+                        <p style="text-align: center; color: black">POV Character {{singleCharacter.split('/').pop()}}</p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <button class="btn btn-block btn-outline-warning offset-4 col-4" (click)="goBack()">Go Back</button> 
+
+  </div>
+
+</section>
